@@ -26,15 +26,13 @@ Provide step-by-step instructions on how to set up and run both the .NET and Ang
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/JohnsonSnow/eHealthcareApp.git
+   git clone https://github.com/JohnsonSnow/RocketFin.git
 
 2. Navigate to the .NET project directory:
    ```bash
-   cd eHealthcareApp
+   cd RocketFin
    
-3. Restore dependencies:
-   ```bash
-   dotnet restore
+3. Setup Docker-Compose as the application startup project in Visual Studio :
 
 4. Set up your database
    ```bash
