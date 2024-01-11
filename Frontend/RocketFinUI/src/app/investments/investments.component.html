@@ -1,1 +1,122 @@
 <p>investments works!</p>
+<p>transactions works!</p>
+<mat-card class="mg-20">
+    <mat-card-header>
+        <mat-card-title>
+            List of transactions
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="searchFormGroup" (ngSubmit)="onSubmit()">
+            <div class="mg-20">
+                <table cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="half-width">
+                                <input matInput placeholder="search" formControlName="searchTerm">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <div class="half-width">
+                                <button mat-mini-fab color="primary" type="submit" [disabled]="!searchFormGroup.valid" aria-label="Example icon button with a home icon">
+                                    <mat-icon>search</mat-icon>
+                                  </button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+            </div>
+        </form>
+        <table mat-table [dataSource]="dataSource">
+            <<ng-container matColumnDef="transactionId">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let element">{{element.transactionId}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef>Symbol</th>
+                <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="shortName">
+                <th mat-header-cell *matHeaderCellDef>shortName</th>
+                <td mat-cell *matCellDef="let element">{{element.shortName}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="longName">
+                <th mat-header-cell *matHeaderCellDef>longName</th>
+                <td mat-cell *matCellDef="let element">{{element.longName}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="ask">
+                <th mat-header-cell *matHeaderCellDef>ask</th>
+                <td mat-cell *matCellDef="let element">{{element.ask}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="bid">
+                <th mat-header-cell *matHeaderCellDef>bid</th>
+                <td mat-cell *matCellDef="let element">{{element.bid}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="regularMarketPrice">
+                <th mat-header-cell *matHeaderCellDef>regularMarketPrice</th>
+                <td mat-cell *matCellDef="let element">{{element.regularMarketPrice}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="regularMarketDayHigh">
+                <th mat-header-cell *matHeaderCellDef>bid</th>
+                <td mat-cell *matCellDef="let element">{{element.regularMarketDayHigh}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="regularMarketDayLow">
+                <th mat-header-cell *matHeaderCellDef>regularMarketDayLow</th>
+                <td mat-cell *matCellDef="let element">{{element.regularMarketDayLow}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="regularMarketChange">
+                <th mat-header-cell *matHeaderCellDef>regularMarketChange</th>
+                <td mat-cell *matCellDef="let element">{{element.regularMarketChange}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="regularMarketChangePercent">
+                <th mat-header-cell *matHeaderCellDef>regularMarketChangePercent</th>
+                <td mat-cell *matCellDef="let element">{{element.regularMarketChangePercent}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="regularMarketOpen">
+                <th mat-header-cell *matHeaderCellDef>regularMarketOpen</th>
+                <td mat-cell *matCellDef="let element">{{element.regularMarketOpen}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>quantity</th>
+                <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="pricePerShare">
+                <th mat-header-cell *matHeaderCellDef>pricePerShare</th>
+                <td mat-cell *matCellDef="let element">{{element.pricePerShare}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="purchaseDateAtUtcNow">
+                <th mat-header-cell *matHeaderCellDef>purchaseDateAtUtcNow</th>
+                <td mat-cell *matCellDef="let element">{{element.purchaseDateAtUtcNow}}</td>
+            </ng-container>
+
+            <<ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <a [routerLink]="[]">Delete</a>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons>
+
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>

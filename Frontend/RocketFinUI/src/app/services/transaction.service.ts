@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class TransactionService {
 
-  private baseAddress = 'https://localhost:55867';
+  private baseAddress = 'https://localhost:5201';
   constructor(private httpClient: HttpClient) { }
 
   getAllTransactions(): Observable<Transaction> {

@@ -6,9 +6,11 @@ services:
     build:
       context: .
       dockerfile: Web.Api/Dockerfile
+    container_name: rocketfin_backend_api
     restart: unless-stopped
     ports:
-    - 50001:80
+      - "5200:8080"
+      - "5201:8081"
     depends_on:
       - database
     environment:
@@ -22,8 +24,10 @@ services:
     image: ${DOCKER_REGISTRY-}webui
     build:
       context: /Frontend/RocketFinUI
-     # dockerfile: /Frontend/RocketFinUI/Dockerfile
+    container_name: rocketfin_frontend_ui
     restart: unless-stopped
+    ports:
+      - '4200:4200'
 
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest

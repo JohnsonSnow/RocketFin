@@ -8,7 +8,7 @@ import { Instrument } from '../models/instrument';
 })
 export class InvestmentService {
 
-  private baseAddress = 'https://localhost:55867';
+  private baseAddress = 'https://localhost:5201';
   constructor(private httpClient: HttpClient) { }
 
   getInstrumentBySymbol(name: string): Observable<Instrument> {

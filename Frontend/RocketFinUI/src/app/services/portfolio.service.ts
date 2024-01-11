@@ -8,7 +8,7 @@ import { Transaction } from '../models/transaction';
   providedIn: 'root'
 })
 export class PortfolioService {
-  private baseAddress = 'https://localhost:55867';
+  private baseAddress = 'https://localhost:5201';
   constructor(private httpClient: HttpClient) { }
 
   getPortfolios(): Observable<Portfolio> {
