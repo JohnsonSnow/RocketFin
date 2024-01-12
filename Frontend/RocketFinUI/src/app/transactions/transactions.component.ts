@@ -24,17 +24,10 @@ export class TransactionsComponent {
 
     this.searchFormGroup = this.formBuilder.group({
       searchTerm: ['', Validators.required],
-      name: ['']
     });
 
-    if (this.searchTermValue?.length > 0) {
-      this.transactionService.getAllTransactionsBySymbol(this.searchTermValue).subscribe((data: Transaction) => { 
-        this.allTransaction = data.value.items;
-  
-        this.dataSource = new MatTableDataSource(this.allTransaction); 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-       });
+    if (this.searchTermValue?.searchTerm?.length > 0) {
+     
     }else{
       this.transactionService.getAllTransactions().subscribe((data: Transaction) => { 
         this.allTransaction = data.value.items;
@@ -58,6 +51,13 @@ export class TransactionsComponent {
   onSubmit(){
     if (this.searchFormGroup.valid) {
       this.searchTermValue = this.searchFormGroup.value;
+      this.transactionService.getAllTransactionsBySymbol(this.searchTermValue?.searchTerm).subscribe((data: Transaction) => { 
+        this.allTransaction = data.value.items;
+  
+        this.dataSource = new MatTableDataSource(this.allTransaction); 
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+       });
     }
   }
 }

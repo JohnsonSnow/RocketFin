@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TransactionService } from '../services/transaction.service';
 import { Transaction, TransactionItem } from '../models/transaction';
 import { ActivatedRoute } from '@angular/router';
+import { InvestmentService } from '../services/investment.service';
+import { Instrument, Result } from '../models/instrument';
 
 @Component({
   selector: 'app-investments',
@@ -14,44 +15,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InvestmentsComponent {
 
-  allTransaction: TransactionItem[] = [];
+  investmentData: Result[]  = [];
   symbol!: string;
   searchTermValue!: any;
 
   searchFormGroup!: FormGroup;
 
-  constructor(private transactionService: TransactionService, private router: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(private investmentService: InvestmentService, private router: ActivatedRoute, private formBuilder: FormBuilder) {
     this.symbol = this.router.snapshot.paramMap.get('symbol') || '';
 
     this.searchFormGroup = this.formBuilder.group({
       searchTerm: ['', Validators.required],
-      name: ['']
     });
 
-    if (this.searchTermValue?.length > 0) {
-      this.transactionService.getAllTransactionsBySymbol(this.searchTermValue).subscribe((data: Transaction) => { 
-        this.allTransaction = data.value.items;
-  
-        this.dataSource = new MatTableDataSource(this.allTransaction); 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-       });
-    }else{
-      this.transactionService.getAllTransactions().subscribe((data: Transaction) => { 
-        this.allTransaction = data.value.items;
-  
-        this.dataSource = new MatTableDataSource(this.allTransaction); 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-       });
-    }
-
-    
   }
 
-  displayColumns = ["transactionId", "symbol", "shortName", "longName", "ask", "bid", "regularMarketPrice", "regularMarketDayHigh", "regularMarketDayLow", "regularMarketChange", "regularMarketChangePercent", "regularMarketOpen", "quantity", "pricePerShare", "purchaseDateAtUtcNow", "actions"];
+  displayColumns = ["transactionId", "symbol", "shortName", "longName", "ask", "bid", "regularMarketPrice", "regularMarketDayHigh", "regularMarketDayLow", "regularMarketChange", "regularMarketChangePercent", "regularMarketOpen", "actions"];
 
-  dataSource = new MatTableDataSource(this.allTransaction);
+  dataSource = new MatTableDataSource(this.investmentData);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -59,6 +40,16 @@ export class InvestmentsComponent {
   onSubmit(){
     if (this.searchFormGroup.valid) {
       this.searchTermValue = this.searchFormGroup.value;
+      console.log(this.searchTermValue.searchTerm);
+
+      this.investmentService.getInstrumentBySymbol(this.searchTermValue.searchTerm).subscribe((data: Instrument) => { 
+        this.investmentData = data.value.quoteResponse.result;;
+  
+        this.dataSource = new MatTableDataSource(this.investmentData); 
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+       });
+ 
     }
   }
 }
