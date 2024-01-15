@@ -20,4 +20,10 @@ export class TransactionService {
     const url = `${this.baseAddress}/api/Transaction/GetAllTransactions?symbol=${name}`;
     return this.httpClient.get<Transaction>(url);
    }
+
+   purchaseShares(data: any): Observable<any> {
+    const url = `${this.baseAddress}/api/Transaction/PurchaseShares`;
+
+    return this.httpClient.post<any>(url, data);
+   }
 }

@@ -2,7 +2,7 @@
 <mat-card class="mg-20">
     <mat-card-header>
         <mat-card-title>
-            But Shares
+            Buy Shares
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -107,7 +107,7 @@
             <<ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let element">
-                    <a [routerLink]="[]">Buy Shares</a>
+                    <button mat-raised-button color="primary" (click)="openDialog(element.symbol)">Buy Shares</button>
                 </td>
             </ng-container>
 

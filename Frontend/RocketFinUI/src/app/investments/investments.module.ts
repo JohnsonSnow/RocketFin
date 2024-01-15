@@ -13,11 +13,13 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
-
-
+import { MatDialogModule } from "@angular/material/dialog";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PurchaseSharesComponent } from '../purchase-shares/purchase-shares.component';
 @NgModule({
   declarations: [
     InvestmentsComponent,
+    PurchaseSharesComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     RouterModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    //MatDialogModule,
+    MatSnackBarModule
   ]
 })
 export class InvestmentsModule { }
